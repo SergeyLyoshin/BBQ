@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: %i[ show edit update destroy ]
+  # Задаем объект @event для тех действий, где он нужен
+  before_action :set_event, only: %i[show edit update destroy]
 
   def index
     @events = Event.all
@@ -39,11 +40,13 @@ class EventsController < ApplicationController
   end
 
   private
-    def set_event
-      @event = Event.find(params[:id])
-    end
 
-    def event_params
-      params.require(:event).permit(:title, :address, :datetime, :description)
-    end
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # редактируем параметры события
+  def event_params
+    params.require(:event).permit(:title, :address, :datetime, :description)
+  end
 end
