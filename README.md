@@ -1,24 +1,65 @@
-# README
+## Шашлыки
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Описание
 
-Things you may want to cover:
+Приложение для управления событиями, в котором вы можете создавать события, подписываться на них, комментировать их, прикреплять фотографии, ограничивать к ним доступ.
 
-* Ruby version
+Создано на версии Ruby 2.7.4, Rails 6.1.6
 
-* System dependencies
+Язык: Русский.
 
-* Configuration
+### Запуск
 
-* Database creation
+1. Нужно установить в Gem файле нужную версию Руби и установить соответствующую версию в систему например rbenv install 3.0.2 и изменить для проекта командой 
 
-* Database initialization
+```console
+$ rbenv local 3.0.2
+```
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+2. Изменить версию базы данных в гем файле на ту, что у вас есть в системе. Например
 
-* Deployment instructions
+```console
+$ gem 'sqlite3', '~> 1.4'
+```
 
-* ...
+3. Установить гем  Magic
+
+```console
+$ sudo apt-get install imagemagick libmagickwand-dev
+```
+
+4. Установить мэнеджер проектов yarn
+
+```console
+$ yarn install
+```
+
+5. Обновить библиотеки
+
+```console
+$ bundle update
+```
+
+6. Настроить подключение к БД в database.yml по шаблону database.yml.sample
+
+<https://gist.github.com/mmizutani/5a2d84cc438675d3bcbfd9cc59de53ba>
+
+
+7. Cоздать базу данных
+
+```console
+$ rails db:create
+```
+
+8. Прогнать миграции
+
+```console
+$ rails db:migrate
+```
+
+9. Запустить сервер командой
+
+```console
+$ rails server
+```
