@@ -1,0 +1,26 @@
+<div class="bg-light">
+  <br>
+  <div class="container">
+    <div class="row align-items-start">
+      <div class="col-sm-4">
+        <p><%= github_url('realvint', 'bbq') %> - <%= t('.description') %> <br />
+        <%= link_to t('.privacy'), root_url << 'privacy.html', class: 'link-secondary small', target: '_blank' %></p>
+      </div>
+      <div class="col-sm-4">
+        <p>
+          <%= t('.project') %>
+          <%= link_to 'Good Programmer', "https://goodprogrammer.ru/rails", target: '_blank' %>
+          <%= t('.profession') %>
+          &#171 <%= t('.title') %> &#187
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <p>
+          <%= t('.author') %>
+          <%= mail_to "victor.malukhin@gmail.com" %>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div>
