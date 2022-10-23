@@ -1,9 +1,8 @@
 <% errors = model.errors %>
-
 <% if errors.any? %>
   <div class="alert alert-danger">
     <div class="lead buffer-bottom">
-      В вашей форме <%= errors.count %> ошибок
+      В вашей форме <%= t('declinations.errors', count: errors.count) %>
     </div>
 
     <ul>
