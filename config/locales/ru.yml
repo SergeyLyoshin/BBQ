@@ -29,9 +29,14 @@ ru:
       destroyed: 'Комментарий удален'
       created: 'Ваш комментарий добавлен'
       error: 'Ошибка с комментарием'
+      
   app:
     name: 'Шашлыки'
     company: 'Хороший программист'
+  comments:
+    comment:
+      destroy_confirm: 'Вы уверены, что хотите удалить этот комментарий?'
+
   declinations:
     errors:
       one: "%{count} ошибка"
