@@ -6,26 +6,28 @@ class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:destroy]
 
   def create
-    @subscription = Subscription.new(subscription_params)
-
-    respond_to do |format|
-      if @subscription.save
-        format.html { redirect_to subscription_url(@subscription), notice: "Subscription was successfully created." }
-        format.json { render :show, status: :created, location: @subscription }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
-      end
+    # Болванка для новой подписки
+    @new_subscription = @event.subscriptions.build(subscription_params)
+    @new_subscription.user = current_user
+  
+    if @new_subscription.save
+      # Если сохранилась, редиректим на страницу самого события
+      redirect_to @event, notice: I18n.t('controllers.subscriptions.created')
+    else
+      # если ошибки — рендерим шаблон события
+      render 'events/show', alert: I18n.t('controllers.subscriptions.error')
     end
   end
-
+  
   def destroy
-    @subscription.destroy
-
-    respond_to do |format|
-      format.html { redirect_to subscriptions_url, notice: "Subscription was successfully destroyed." }
-      format.json { head :no_content }
+    message = {notice: I18n.t('controllers.subscriptions.destroyed')}
+    if current_user_can_edit?(@subscription)
+      @subscription.destroy
+    else
+      message = {alert: I18n.t('controllers.subscriptions.error')}
     end
+  
+    redirect_to @event, message
   end
 
   private

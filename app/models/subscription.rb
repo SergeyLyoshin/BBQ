@@ -2,7 +2,7 @@ class Subscription < ApplicationRecord
   belongs_to :event
   belongs_to :user
 
-  validates event, presense: true
+  validates :event, presence: true
 
   # Проверки user_name и user_email выполняются,
   # только если user не задан
@@ -22,7 +22,7 @@ class Subscription < ApplicationRecord
     if user.present?
     user.name
     else
-    super
+      super
     end
   end
 
