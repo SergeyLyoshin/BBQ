@@ -10,6 +10,8 @@ class Subscription < ApplicationRecord
   validates :user_name, presence: true, unless: -> { user.present? }
   validates :user_email, presence: true, format: /\A[a-zA-Z0-9\-_.]+@[a-zA-Z0-9\-_.]+\z/, unless: -> { user.present? }
 
+  before_validation :check_event_owner
+
   # Для конкретного event_id один юзер может подписаться только один раз (если юзер задан)
   validates :user, uniqueness: {scope: :event_id}, if: -> { user.present? }
 
@@ -20,7 +22,7 @@ class Subscription < ApplicationRecord
   # если нет – дергаем исходный метод
   def user_name
     if user.present?
-    user.name
+      user.name
     else
       super
     end
@@ -36,4 +38,9 @@ class Subscription < ApplicationRecord
     end
   end
 
+  def check_event_owner
+    if user == event.user
+      errors.add(:user, message: I18n.t('models.subscription.errors.own_event'))
+    end
+  end
 end

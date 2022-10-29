@@ -6,11 +6,19 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :subscriptions
 
-  validates :name, presence: true, length: {maximum: 35}
+  # validates :name, presence: true, length: {maximum: 35}
   
   before_validation :set_name, on: :create
 
   after_commit :link_subscriptions, on: :create
+
+  def user_name
+    if user.present?
+      user.name
+    else
+      super
+    end
+  end
 
   private
   

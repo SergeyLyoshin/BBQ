@@ -6,6 +6,7 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+    # @events = authorize policy_scope(Event)
   end
 
   def show
@@ -18,6 +19,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+  
   end
 
   def create
@@ -31,6 +33,7 @@ class EventsController < ApplicationController
   end
 
   def update
+
     if @event.update(event_params)
       redirect_to @event, notice: t('controllers.events.updated')
     else

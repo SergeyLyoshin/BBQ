@@ -1,19 +1,18 @@
 class CommentsController < ApplicationController
-  # задаем "родительский" event для коммента
   before_action :set_event, only: [:create, :destroy]
-
-  # задаем сам коммент
   before_action :set_comment, only: [:destroy]
 
   def create
+    # Создаём объект @new_comment из @event
     @new_comment = @event.comments.build(comment_params)
+    # Проставляем пользователя, если он задан
     @new_comment.user = current_user
 
     if @new_comment.save
-      # если сохранился успешно, редирект на страницу самого события
+      # Если сохранился, редирект на страницу самого события
       redirect_to @event, notice: I18n.t('controllers.comments.created')
     else
-      # если ошибки — рендерим здесь же шаблон события
+      # Если ошибки — рендерим здесь же шаблон события (своих шаблонов у коммента нет)
       render 'events/show', alert: I18n.t('controllers.comments.error')
     end
   end
@@ -31,10 +30,13 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def set_event
     @event = Event.find(params[:event_id])
   end
 
+  # Комментарий будем искать не по всей базе,
+  # а у конкретного события
   def set_comment
     @comment = @event.comments.find(params[:id])
   end
