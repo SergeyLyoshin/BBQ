@@ -17,7 +17,6 @@ ru:
         address: 'Место проведения'
         datetime: 'Дата и время'
         description: 'Описание'
-
       subscription:
         user_name: 'Имя пользователя'
         user_email: 'Эл. адрес'
