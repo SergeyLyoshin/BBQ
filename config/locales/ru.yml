@@ -8,8 +8,9 @@ ru:
     # Перевод атрибутов моделей
     attributes:
       user:
-        email: 'Email'
+        email: 'Почта'
         name: 'Имя'
+        avatar: 'Аватарка'
         password: 'Пароль'
         password_confirmation: 'Подтверждение пароля'
       event:
